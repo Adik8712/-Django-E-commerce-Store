@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+
+<main>
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for i in categories %}
+                <div class="col">
+                    <div class="card shadow-sm text-bg-dark">
+                        <div class="card-body">
+                            <h4 class="card-text">{{ i.title }}</h4>
+                                <small class="text-body-secondary">{{ i.created_at }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="container">
+    <form style="margin-top: 20px; margin-bottom: 20px; border-radius: 15px; " class="card shadow-sm text-bg-dark"
+        method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.title }}
+        <button class="btn btn-outline-light" style="width: 1190px; margin: 20px;" type="submit">Опубликовать</button>
+        <a type="button" href="/" class="btn btn-outline-light"
+            style="width: 1190px; margin: 20px; margin-top: 0;">Назад</a>
+
+    </form>
+</div>
+{% endblock %}

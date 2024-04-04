@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+<div class="shadow p-3 mb-5 container py-5 text-bg-dark" style="height: 700px; border-radius: 15px; overflow: auto;">
+
+    <div class="container">
+        <a href="/settings/security"><button class="btn btn-warning">Security</button></a>
+        <a href="/settings"><button class="btn btn-success">settings</button></a>
+        <a href="/settings"><button class="btn btn-success">settings</button></a>
+        <a href="/settings"><button class="btn btn-success">settings</button></a>
+    </div>
+
+    <div class="container">
+
+        <form class="container card shadow-sm text-bg-dark" method="post"
+            style="text-align: center; width: 1200px; border-radius: 24px; margin: 30px;" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if user.profile.image %}
+            <img src="{{ user.profile.image.url }}" alt="Avatar" class="img-fluid my-5"
+                style="border-radius: 50%; width: 220px; margin: 50px;" />
+            {% else %}
+            <img src="{% static 'img/profile.jpg' %}" alt="Avatar" class="img-fluid my-5"
+                style="border-radius: 50%; width: 220px; margin: 50px;" />
+            {% endif %}
+            <div class="input-group flex-nowrap" style="margin: 20px; width: 1000px;">
+                <span class="input-group-text" id="addon-wrapping">@</span>
+                <input type="text" name="username" class="form-control text-bg-dark" aria-describedby="addon-wrapping"
+                    aria-label="Username" placeholder="Username" value="{{ user.username }}" required>
+            </div>
+
+            <div class="input-group mb-3" style="margin: 20px; width: 1000px;">
+                <span class="input-group-text" id="inputGroup-sizing-default">Password</span>
+                <input type="password" name="password" class="form-control text-bg-dark" aria-label="Password"
+                    aria-describedby="inputGroup-sizing-default" required>
+            </div>
+
+            <div class="input-group mb-3" style="margin: 20px; width: 1000px;">
+                <span class="input-group-text" id="inputGroup-sizing-default">Password repeat</span>
+                <input type="password" name="password-repeat" class="form-control text-bg-dark" aria-label="Password"
+                    aria-describedby="inputGroup-sizing-default" required>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin: 20px; width: 1000px">
+                <a href="/" type="button" class="btn btn-outline-danger">Home</a>
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
